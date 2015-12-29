@@ -1,0 +1,50 @@
+#! /bin/bash
+#
+# Check status and renew .tk domains
+
+if [ "$1" = "" -o "$1" = "-h" -o "$1" = "--help" ]; then
+	echo "Checks the status and renews .tk domains for 1 year"
+	echo "Usage: dottk EMAIL PASSWORD DOMAIN1 [DOMAIN2...]"
+	echo 'Domain names do not include the tld-- e.g. "mydomain" and not "mydomain.tk"'
+fi
+
+
+# Configuration
+#
+tkemail=$1
+tkpwd=$2
+shift 2
+tkdomains="$*"
+
+tkapi=https://api.domainshare.tk
+
+# Support functions
+#
+function soap2text() {
+	sed -ne 's/^[^<]*<\([^>]*\)[^>]*>\([^<]*\)<.*/\1:\t\2/p'
+}
+function tkping() {
+	wget -q4O - https://api.domainshare.tk/ping | soap2text
+}
+function tkdo() {
+	local postdata="email=$tkemail&password=$tkpwd&domainname=$2.tk"
+	if [ -n "$3" ]; then postdata="$postdata&$3"; fi
+	wget -q4O - --post-data "$postdata" $tkapi/$1 | soap2text
+}
+
+
+# Main
+#
+tkping
+
+echo -e "\n-- Checking Availability:"
+for domain in $tkdomains; do
+	echo; tkdo availability_check $domain
+done
+
+echo -e "\n-- Renewing for 12 Months:"
+for domain in $tkdomains; do
+	echo; tkdo renew $domain monthsofregistration=12
+done
+
+
