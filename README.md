@@ -1,6 +1,6 @@
-# DotTK
+# Auto-renew DotTK
 
-Automatically renews .tk domains for 12 months.
+Automatically renew .tk domains for 12 months.
 
 Use with care! This is a script I created a few years ago and the .tk API and license may have changed in the meantime.
 
