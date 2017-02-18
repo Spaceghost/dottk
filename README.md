@@ -28,5 +28,5 @@ The dottk API used to only allow renewals near the expiration date. I used a cro
 
 ## License
 
-MIT license. See the LICENSE file for details. 
+DotTK is open-source software released under the MIT license. See the LICENSE file for details. 
 
