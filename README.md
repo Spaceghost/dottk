@@ -10,13 +10,13 @@ Automatically renew .tk domains for 12 months.
 #### Installation
 Download `dottk` and make it executable with:
 ~~~ bash
-	$  chmod u+x dottk
+$  chmod u+x dottk
 ~~~
 
 #### Renewing domains
 Run the scriipt:
 ~~~ bash
-	$  dottk EMAIL PASSWORD DOMAIN [DOMAIN ...]
+$  dottk EMAIL PASSWORD DOMAIN [DOMAIN ...]
 ~~~
 
 Do not include the tld in the `DOMAIN`-- e.g. use "mydomain" and not "mydomain.tk"'.
